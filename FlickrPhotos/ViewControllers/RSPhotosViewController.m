@@ -9,6 +9,7 @@
 #import "RSPhotosViewController.h"
 #import "RSPhotosViewModel.h"
 #import "RSPhotoCollectionViewCell.h"
+#import "FBKVOController.h"
 
 static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
@@ -17,6 +18,8 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 @property (nonatomic, strong) RSPhotosViewModel *viewModel;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *photosCollectionView;
+@property (nonatomic, strong) FBKVOController *KVOController;
+
 @end
 
 @implementation RSPhotosViewController
@@ -26,6 +29,7 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
+        _KVOController = [FBKVOController controllerWithObserver:self];
     }
     return self;
 }
@@ -50,7 +54,13 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
 - (void)setupObservers
 {
-    [self.viewModel addObserver:self forKeyPath:@"photosArray" options:NSKeyValueObservingOptionNew context:nil];
+    [self.KVOController observe:self.viewModel keyPath:@"photosArray" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld block:^(id observer, id object, NSDictionary *change) {
+        [self.photosCollectionView reloadData];
+    }];
+    
+    [self.KVOController observe:self.viewModel keyPath:@"photoId" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld block:^(id observer, id object, NSDictionary *change) {
+        [self.photosCollectionView reloadData];
+    }];
 }
 
 #pragma mark - UICollectionViewDataSource methods
@@ -91,15 +101,6 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
     return cell;
 }
 
-#pragma mark - KVO observer
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"photosArray"]) {
-        [self.photosCollectionView reloadData];
-    }
-}
-
 #pragma mark - IBActions
 
 - (IBAction)reloadImages:(id)sender
@@ -107,5 +108,9 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
     [self.viewModel updatePhotos];
 }
 
+- (void)dealloc
+{
+    [_KVOController unobserveAll];
+}
 
 @end

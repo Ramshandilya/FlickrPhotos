@@ -27,6 +27,7 @@
             [self.photosArray removeAllObjects];
             [[self mutableArrayValueForKeyPath:@"photosArray"] addObjectsFromArray:photos];
 //            [self didChangeValueForKey:@"photosArray"];
+            [self setPhotoId:@"hdbfhdb"];
         });
         
     } failureBlock:^(NSError *error) {
