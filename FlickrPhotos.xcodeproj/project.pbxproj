@@ -19,6 +19,11 @@
 		0A1096AD1977DEA600CF7701 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1096951977DEA600CF7701 /* UIKit.framework */; };
 		0A1096B51977DEA600CF7701 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A1096B31977DEA600CF7701 /* InfoPlist.strings */; };
 		0A1096B71977DEA600CF7701 /* FlickrPhotosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1096B61977DEA600CF7701 /* FlickrPhotosTests.m */; };
+		0A1096D51977DF1700CF7701 /* RSPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1096CD1977DF1700CF7701 /* RSPhotosViewController.m */; };
+		0A1096D61977DF1700CF7701 /* RSPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1096CE1977DF1700CF7701 /* RSPhotosViewController.xib */; };
+		0A1096D71977DF1700CF7701 /* RSPhotosViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1096D11977DF1700CF7701 /* RSPhotosViewModel.m */; };
+		0A1096D81977DF1700CF7701 /* RSPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1096D41977DF1700CF7701 /* RSPhotoCollectionViewCell.m */; };
+		0A1096DA1977EAB500CF7701 /* RSPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1096D91977EAB500CF7701 /* RSPhotoCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +53,14 @@
 		0A1096B21977DEA600CF7701 /* FlickrPhotosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlickrPhotosTests-Info.plist"; sourceTree = "<group>"; };
 		0A1096B41977DEA600CF7701 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A1096B61977DEA600CF7701 /* FlickrPhotosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotosTests.m; sourceTree = "<group>"; };
+		0A1096CC1977DF1700CF7701 /* RSPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSPhotosViewController.h; sourceTree = "<group>"; };
+		0A1096CD1977DF1700CF7701 /* RSPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSPhotosViewController.m; sourceTree = "<group>"; };
+		0A1096CE1977DF1700CF7701 /* RSPhotosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSPhotosViewController.xib; sourceTree = "<group>"; };
+		0A1096D01977DF1700CF7701 /* RSPhotosViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSPhotosViewModel.h; sourceTree = "<group>"; };
+		0A1096D11977DF1700CF7701 /* RSPhotosViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSPhotosViewModel.m; sourceTree = "<group>"; };
+		0A1096D31977DF1700CF7701 /* RSPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		0A1096D41977DF1700CF7701 /* RSPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		0A1096D91977EAB500CF7701 /* RSPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,10 +120,13 @@
 		0A1096971977DEA600CF7701 /* FlickrPhotos */ = {
 			isa = PBXGroup;
 			children = (
+				0A1096A31977DEA600CF7701 /* Images.xcassets */,
 				0A1096A01977DEA600CF7701 /* RSAppDelegate.h */,
 				0A1096A11977DEA600CF7701 /* RSAppDelegate.m */,
-				0A1096A31977DEA600CF7701 /* Images.xcassets */,
 				0A1096981977DEA600CF7701 /* Supporting Files */,
+				0A1096CB1977DF1700CF7701 /* ViewControllers */,
+				0A1096CF1977DF1700CF7701 /* ViewModels */,
+				0A1096D21977DF1700CF7701 /* Views */,
 			);
 			path = FlickrPhotos;
 			sourceTree = "<group>";
@@ -142,6 +158,35 @@
 				0A1096B31977DEA600CF7701 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0A1096CB1977DF1700CF7701 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0A1096CC1977DF1700CF7701 /* RSPhotosViewController.h */,
+				0A1096CD1977DF1700CF7701 /* RSPhotosViewController.m */,
+				0A1096CE1977DF1700CF7701 /* RSPhotosViewController.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0A1096CF1977DF1700CF7701 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0A1096D01977DF1700CF7701 /* RSPhotosViewModel.h */,
+				0A1096D11977DF1700CF7701 /* RSPhotosViewModel.m */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0A1096D21977DF1700CF7701 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0A1096D31977DF1700CF7701 /* RSPhotoCollectionViewCell.h */,
+				0A1096D41977DF1700CF7701 /* RSPhotoCollectionViewCell.m */,
+				0A1096D91977EAB500CF7701 /* RSPhotoCollectionViewCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +265,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A1096DA1977EAB500CF7701 /* RSPhotoCollectionViewCell.xib in Resources */,
+				0A1096D61977DF1700CF7701 /* RSPhotosViewController.xib in Resources */,
 				0A10969C1977DEA600CF7701 /* InfoPlist.strings in Resources */,
 				0A1096A41977DEA600CF7701 /* Images.xcassets in Resources */,
 			);
@@ -240,8 +287,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A1096D71977DF1700CF7701 /* RSPhotosViewModel.m in Sources */,
+				0A1096D81977DF1700CF7701 /* RSPhotoCollectionViewCell.m in Sources */,
 				0A10969E1977DEA600CF7701 /* main.m in Sources */,
 				0A1096A21977DEA600CF7701 /* RSAppDelegate.m in Sources */,
+				0A1096D51977DF1700CF7701 /* RSPhotosViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

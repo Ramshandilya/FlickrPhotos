@@ -7,6 +7,7 @@
 //
 
 #import "RSAppDelegate.h"
+#import "RSPhotosViewController.h"
 
 @implementation RSAppDelegate
 
@@ -14,6 +15,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    RSPhotosViewController *photosViewController = [[RSPhotosViewController alloc] initWithNibName:@"RSPhotosViewController" bundle:nil];
+    self.window.rootViewController = photosViewController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
