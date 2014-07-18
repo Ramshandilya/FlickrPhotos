@@ -11,6 +11,7 @@
 #import "RSPhotoCollectionViewCell.h"
 #import "FBKVOController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "HTProgressHUD.h"
 
 static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
@@ -25,6 +26,7 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 @implementation RSPhotosViewController
 {
     FBKVOController *_KVOController;
+    HTProgressHUD *spinner;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,7 +45,10 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
     
     self.viewModel = [[RSPhotosViewModel alloc] init];
     [self setupObservers];
-    [self.viewModel updatePhotos];
+    
+    spinner = [[HTProgressHUD alloc] init];
+    
+    [self reloadData];
     
     [self.photosCollectionView registerNib:[UINib nibWithNibName:@"RSPhotoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:PhotoCellIdentifier];
     
@@ -58,12 +63,20 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
 - (void)setupObservers
 {
-    [_KVOController observe:self.viewModel keyPath:@"photosArray" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld block:^(id observer, id object, NSDictionary *change) {
+    [_KVOController observe:self.viewModel keyPath:@"photosArray" options:NSKeyValueObservingOptionNew block:^(id observer, id object, NSDictionary *change) {
+        [spinner hideWithAnimation:YES];
         [self.photosCollectionView reloadData];
     }];
     
 }
 
+- (void)reloadData
+{
+    spinner.text = @"Loading..";
+    [spinner showInView:self.view];
+    
+    [self.viewModel updatePhotos];
+}
 #pragma mark - UICollectionViewDataSource methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -87,7 +100,7 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
 - (IBAction)reloadImages:(id)sender
 {
-    [self.viewModel updatePhotos];
+    [self reloadData];
 }
 
 - (void)dealloc
