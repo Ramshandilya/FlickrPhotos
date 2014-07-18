@@ -25,6 +25,8 @@
 		0A1096D81977DF1700CF7701 /* RSPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1096D41977DF1700CF7701 /* RSPhotoCollectionViewCell.m */; };
 		0A1096DA1977EAB500CF7701 /* RSPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1096D91977EAB500CF7701 /* RSPhotoCollectionViewCell.xib */; };
 		0A425AD9197846AD007B7396 /* FBKVOController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A425AD8197846AD007B7396 /* FBKVOController.m */; };
+		0A75D8CF1978F8AA0009EE89 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A75D8CE1978F8AA0009EE89 /* ImageIO.framework */; };
+		0A75D8D21978F9590009EE89 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A75D8D11978F9590009EE89 /* SDWebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		0A1096D91977EAB500CF7701 /* RSPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		0A425AD7197846AD007B7396 /* FBKVOController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBKVOController.h; sourceTree = "<group>"; };
 		0A425AD8197846AD007B7396 /* FBKVOController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBKVOController.m; sourceTree = "<group>"; };
+		0A75D8CE1978F8AA0009EE89 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		0A75D8D11978F9590009EE89 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A75D8D21978F9590009EE89 /* SDWebImage.framework in Frameworks */,
+				0A75D8CF1978F8AA0009EE89 /* ImageIO.framework in Frameworks */,
 				0A1096941977DEA600CF7701 /* CoreGraphics.framework in Frameworks */,
 				0A1096961977DEA600CF7701 /* UIKit.framework in Frameworks */,
 				0A1096921977DEA600CF7701 /* Foundation.framework in Frameworks */,
@@ -112,6 +118,7 @@
 		0A1096901977DEA600CF7701 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A75D8CE1978F8AA0009EE89 /* ImageIO.framework */,
 				0A1096911977DEA600CF7701 /* Foundation.framework */,
 				0A1096931977DEA600CF7701 /* CoreGraphics.framework */,
 				0A1096951977DEA600CF7701 /* UIKit.framework */,
@@ -196,6 +203,7 @@
 		0A425AD5197846AD007B7396 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				0A75D8D01978F9590009EE89 /* SDWebImage */,
 				0A425AD6197846AD007B7396 /* FBKVOController */,
 			);
 			path = ThirdParty;
@@ -208,6 +216,14 @@
 				0A425AD8197846AD007B7396 /* FBKVOController.m */,
 			);
 			path = FBKVOController;
+			sourceTree = "<group>";
+		};
+		0A75D8D01978F9590009EE89 /* SDWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				0A75D8D11978F9590009EE89 /* SDWebImage.framework */,
+			);
+			path = SDWebImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,9 +446,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FlickrPhotos/ThirdParty/SDWebImage",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlickrPhotos/FlickrPhotos-Prefix.pch";
 				INFOPLIST_FILE = "FlickrPhotos/FlickrPhotos-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -443,9 +464,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FlickrPhotos/ThirdParty/SDWebImage",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlickrPhotos/FlickrPhotos-Prefix.pch";
 				INFOPLIST_FILE = "FlickrPhotos/FlickrPhotos-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

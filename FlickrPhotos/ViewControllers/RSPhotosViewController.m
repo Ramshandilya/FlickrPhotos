@@ -10,6 +10,7 @@
 #import "RSPhotosViewModel.h"
 #import "RSPhotoCollectionViewCell.h"
 #import "FBKVOController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
@@ -18,11 +19,13 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 @property (nonatomic, strong) RSPhotosViewModel *viewModel;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *photosCollectionView;
-@property (nonatomic, strong) FBKVOController *KVOController;
 
 @end
 
 @implementation RSPhotosViewController
+{
+    FBKVOController *_KVOController;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,11 +41,12 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 {
     [super viewDidLoad];
     
+    self.viewModel = [[RSPhotosViewModel alloc] init];
     [self setupObservers];
+    [self.viewModel updatePhotos];
     
     [self.photosCollectionView registerNib:[UINib nibWithNibName:@"RSPhotoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:PhotoCellIdentifier];
     
-    self.viewModel = [[RSPhotosViewModel alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,13 +58,10 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
 - (void)setupObservers
 {
-    [self.KVOController observe:self.viewModel keyPath:@"photosArray" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld block:^(id observer, id object, NSDictionary *change) {
+    [_KVOController observe:self.viewModel keyPath:@"photosArray" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld block:^(id observer, id object, NSDictionary *change) {
         [self.photosCollectionView reloadData];
     }];
     
-    [self.KVOController observe:self.viewModel keyPath:@"photoId" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld block:^(id observer, id object, NSDictionary *change) {
-        [self.photosCollectionView reloadData];
-    }];
 }
 
 #pragma mark - UICollectionViewDataSource methods
@@ -77,26 +78,7 @@ static NSString * const PhotoCellIdentifier = @"PhotoCellIdentifier";
     NSDictionary *photoInfo = [self.viewModel.photosArray objectAtIndex:indexPath.row];
     NSString *urlString = photoInfo[@"url_q"];
     
-    
-    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig
-                                  delegate:nil
-                             delegateQueue:nil];
-    
-    NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:[NSURL URLWithString:urlString]
-     
-               completionHandler:^(NSURL *location,
-                                   NSURLResponse *response,
-                                   NSError *error) {
-                   
-                   UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
-                   
-                   dispatch_async(dispatch_get_main_queue(), ^{
-                       cell.photoImageView.image = downloadedImage;
-                   });
-               }];
-    [getImageTask resume];
+    [cell.photoImageView setImageWithURL:[NSURL URLWithString:urlString]];
     
     return cell;
 }

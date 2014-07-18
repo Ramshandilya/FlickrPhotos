@@ -15,7 +15,6 @@
     self = [super init];
     if (self) {
         _photosArray = [[NSMutableArray alloc] init];
-        [self updatePhotos];
     }
     return self;
 }
@@ -26,8 +25,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.photosArray removeAllObjects];
             [[self mutableArrayValueForKeyPath:@"photosArray"] addObjectsFromArray:photos];
-//            [self didChangeValueForKey:@"photosArray"];
-            [self setPhotoId:@"hdbfhdb"];
+
         });
         
     } failureBlock:^(NSError *error) {

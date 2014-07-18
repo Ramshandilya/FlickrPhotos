@@ -11,7 +11,6 @@
 @interface RSPhotosViewModel : NSObject
 
 @property (nonatomic, strong) NSMutableArray *photosArray;
-@property (nonatomic, strong) NSString *photoId;
 
 - (void)updatePhotos;
 
